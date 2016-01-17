@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tiled ArcGIS MapServer</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.12.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.12.1/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" style='width:700px;height:500px'></div>
+    <script>
+
+var url = 'http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer';
+
+      var layers = [
+              new ol.layer.Tile({
+                    source: new ol.source.TileArcGISRest({
+            url: url
+          })
+        })
+      ];
+
+      var map = new ol.Map({
+        layers: layers,
+        target: 'map',
+        view: new ol.View({
+          center: [414665.7711218883,862672.1214927508],
+	projection : 'EPSG:3857',
+          zoom: 8
+        })
+      });
+    </script>
+  </body>
+</html>
