@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>adding lines and polygons</title>
+    <link rel="stylesheet" href="http://openlayer.org/en/v3.12.1/css/ol.css" >
+    <script src="http://openlayer.org/en/v3.12.1/build/ol.js"></script>
+    
+  </head>
+  <body>
+    
+    <div id="map" class="map" style='width:700px;height:500px'></div>
+    
+    <script>
+
+var countryStyle =  new ol.style.Style({
+    fill: new ol.style.Fill({
+      color: [205, 194, 185, 1],
+    }),
+    stroke: new ol.style.Stroke({
+      color: '#000',
+      width: 1
+    }),
+    image: new ol.style.Circle({
+      radius: 7,
+      fill: new ol.style.Fill({
+        color: '#f45',
+      })
+    })
+});
+
+
+var vectorSource = new ol.source.Vector({});
+
+var map = new ol.Map({
+  layers: [
+      new ol.layer.Tile({
+          source: new ol.source.OSM
+      }),
+      new ol.layer.Vector({
+          source: vectorSource,
+          style: countryStyle
+      })
+  ],
+  target: 'map',
+  view: new ol.View({
+   center: ol.proj.transform([8.00, 9.00], 'EPSG:4326', 'EPSG:3857'),
+    zoom: 4
+  })
+});
+
+var poly = new ol.geom.Polygon( [[
+    ol.proj.transform([3.50,7.50], 'EPSG:4326', 'EPSG:3857'),
+    ol.proj.transform([8.50, 9.70], 'EPSG:4326', 'EPSG:3857'),
+    ol.proj.transform([5.00, 6.67], 'EPSG:4326', 'EPSG:3857')
+]]);
+var featurepoly = new ol.Feature({
+    name: "poly",
+    geometry: poly
+});
+vectorSource.addFeature( featurepoly );
+
+
+
+var coordinates = [[865111, 565000], [980011, 765000]]; 
+
+  var layerLines = new ol.layer.Vector({
+      source: new ol.source.Vector({
+          features: [new ol.Feature({
+              geometry: new ol.geom.LineString(coordinates),
+              name: 'Line',
+	          })]
+      }),
+  });
+
+  map.addLayer(layerLines);
+
+var poly = new ol.geom.Polygon([[
+    ol.proj.transform([10.50,11.50], 'EPSG:4326', 'EPSG:3857'),
+    ol.proj.transform([4.50, 9.70], 'EPSG:4326', 'EPSG:3857')
+ ]]);
+var featureline = new ol.Feature({
+    name: "poly",
+    geometry: poly
+});
+vectorSource.addFeature(featureline);
+
+
+</script>
+</body>
+</html>
