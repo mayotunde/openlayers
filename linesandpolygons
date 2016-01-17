@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>adding lines and polygons</title>
-    <link rel="stylesheet" href="http://openlayer.org/en/v3.12.1/css/ol.css" >
-    <script src="http://openlayer.org/en/v3.12.1/build/ol.js"></script>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.12.1/css/ol.css" >
+    <script src="http://openlayers.org/en/v3.12.1/build/ol.js"></script>
     
   </head>
   <body>
