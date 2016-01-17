@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>simple web map</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.12.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.12.1/build/ol.js"></script>    
+  </head>
+  <body>
+    
+    <div id="map" style='width:700px;height:500px'></div>
+    
+    <script>
+
+
+      var map = new ol.Map({
+layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+                    target: 'map',
+        view: new ol.View({
+         center: ol.proj.transform([3.55, 6.44], 'EPSG:4326', 'EPSG:3857'),
+                    zoom: 10
+        })
+      });
+
+    </script>
+  </body>
+</html>
