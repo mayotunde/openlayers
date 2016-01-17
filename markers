@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>adding and styling markers to OL3 powered maps</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.12.1/css/ol.css" >
+    <script src="http://openlayers.org/en/v3.12.1/build/ol.js"></script>
+    
+  </head>
+  <body>
+   
+    <div id="map" style='width:700px;height:500px'></div>
+   
+    <script>
+
+var locations=[];
+
+var site = new ol.Feature({geometry: new ol.geom.Point(ol.proj.transform([8.00, 9.00], 'EPSG:4326', 'EPSG:3857')), name: 'point One'});
+
+var site2 = new ol.Feature({geometry: new ol.geom.Point(ol.proj.transform([3.75, 7.50], 'EPSG:4326',  'EPSG:3857')),name: 'point Two'});
+
+var site3 = new ol.Feature({geometry: new ol.geom.Point(ol.proj.transform([8.75, 8.50], 'EPSG:4326',  'EPSG:3857')),name: 'point Three' });
+
+locations.push(site);locations.push(site2);locations.push(site3);
+
+var vectorSource = new ol.source.Vector({features: locations});
+
+var style = new ol.style.Style({
+image: new ol.style.Circle({
+      radius: 7,
+      fill: new ol.style.Fill({ color: '#ae7',}),
+stroke: new ol.style.Stroke({ color: '#000', width: 3})
+})
+});
+
+var vectorLayer = new ol.layer.Vector({source: vectorSource,style: style});
+
+var map = new ol.Map({target: 'map',
+                        layers: [ new ol.layer.Tile({ source: new ol.source.OSM()}), vectorLayer],
+                    
+        view: new ol.View({center: ol.proj.transform([8.00, 9.00], 'EPSG:4326', 'EPSG:3857'),zoom: 8})
+      });
+  
+</script></body></html>
+
