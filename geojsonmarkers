@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>adding and styling geojson point features to Openlayers3 web map</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.12.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.12.1/build/ol.js"></script>
+     </head>
+  <body>
+    
+    <div id="map" style='width:700px;height:500px'></div>
+    
+    <script>
+
+
+var style =  new ol.style.Style({fill: new ol.style.Fill({color: [205, 194, 185, 1],}),
+    stroke: new ol.style.Stroke({color: '#000', width: 1}),
+    image: new ol.style.Circle({radius: 7, fill: new ol.style.Fill({color: '#ea7',}),
+ stroke: new ol.style.Stroke({color: '#000',width: 2})
+})
+});
+
+
+var points = {"type":"FeatureCollection","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:EPSG::3857"}},"features":[{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[425286.07516671275,825189.3700265634]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[432927.8182162551,830135.9003974919]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[438400.9585084932,821232.501213846]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[427196.5109290983,817796.5280844201]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[419606.40127853915,818681.528858124]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[428229.17890876444,832791.6108204614]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[436645.4229430571,833104.0567708683]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[423943.6067931448,835864.0824234185]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[423840.33999517845,832375.0193109594]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[419916.2016724409,826751.378788432]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[423272.3726063608,821596.9364920198]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[445887.8013610832,820763.9454882868]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[434373.55338778935,815714.2350613609]}},{"type":"Feature","properties":{"Name":"","Description":""},"geometry":{"type":"Point","coordinates":[432876.1848172691,822950.5766042961]}}]};
+
+
+
+var vectorSource = new ol.source.Vector({features: (new ol.format.GeoJSON()).readFeatures(points)});
+    
+      var vectorLayer = new ol.layer.Vector({source: vectorSource,style: style});
+
+var map = new ol.Map({
+  layers: [new ol.layer.Tile({ source: new ol.source.XYZ({
+        url: 'https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF5b3R1bmRlIiwiYSI6IlpFM1Jmck0ifQ.13TB14FKWB328q1q7eEZUQ'
+                             })
+	    }), vectorLayer
+  ],
+  target: 'map',  view: new ol.View({center: [426305.8347966352,811959.8188237506], zoom: 10})
+});
+                    
+</script></body></html>
+
