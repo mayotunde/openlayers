@@ -6,6 +6,9 @@
     <script src="http://openlayers.org/en/v3.12.1/build/ol.js"></script>
   </head>
   <body>
+  <p style='color:brown'><strong>Map application where user can drag and drop Geojson, KML, IGC and Topojson files<br>
+  directly on the map to know their geographical location on the surface of the earth</strong></p>
+  <p><em> Drag the file from your desktop unto the lower map to see the position on the map</em></p> 
     <div id="map" class="map"></div>
     <div id="info">&nbsp;</div>
     <script>
