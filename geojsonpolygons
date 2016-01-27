@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>adding and styling geojson polygon features to Openlayers3 web map</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.12.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.12.1/build/ol.js"></script>
+     </head>
+  <body>
+    
+    <div id="map" style='width:700px;height:500px'></div>
+    
+    <script>
+
+
+var style =  new ol.style.Style({fill: new ol.style.Fill({color: [105, 154, 85, 1],}),
+    stroke: new ol.style.Stroke({color: '#000', width: 1}),
+    image: new ol.style.Circle({radius: 7, fill: new ol.style.Fill({color: '#ea7',}),
+ stroke: new ol.style.Stroke({color: '#000',width: 2})
+})
+});
+
+
+var points = {"type":"FeatureCollection","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:EPSG::3857"}},"features":[{"type":"Feature","properties":{"id":1},"geometry":{"type":"Polygon","coordinates":[[[326590.80846398615,723130.4894372794],[330577.293739395,716252.9622192298],[320895.8294991111,719118.497321983],[326590.80846398615,723130.4894372794]]]}},{"type":"Feature","properties":{"id":2},"geometry":{"type":"Polygon","coordinates":[[[437263.2330146838,738034.6816910029],[440680.2203936077,730008.8539749272],[430049.5929925118,738416.8928849611],[437263.2330146838,738034.6816910029]]]}},{"type":"Feature","properties":{"id":3},"geometry":{"type":"Polygon","coordinates":[[[391893.2339278613,720455.7964684167],[399866.20447868464,719882.6644043779],[382211.76968757744,717399.1589520858],[391893.2339278613,720455.7964684167]]]}}]};
+
+
+
+var vectorSource = new ol.source.Vector({features: (new ol.format.GeoJSON()).readFeatures(points)});
+    
+      var vectorLayer = new ol.layer.Vector({source: vectorSource,style: style});
+
+var map = new ol.Map({
+  layers: [new ol.layer.Tile({ source: new ol.source.XYZ({
+        url: 'https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWF5b3R1bmRlIiwiYSI6IlpFM1Jmck0ifQ.13TB14FKWB328q1q7eEZUQ'
+                             })
+	    }), vectorLayer
+  ],
+  target: 'map',  view: new ol.View({center: [326590.80846398615,723130.4894372794], zoom: 8})
+});
+                    
+</script>
+<div id='logo' style='position:absolute;bottom:80px;left:20px;float:right';>
+<img src="https://lh3.googleusercontent.com/jY9fWF3HjY1NPeluF6LQDyDRL2zqGevA_IW0jKu5Z6GqsiSw6mHE_oCNDvGV_PnL_G6JFZKzZDHNqSHd6wS9F12GHCGpPiDU2yF2RK3ELBYotYSNMPOVUnyyobGCGKDA1Rc3Xga6vaxbx0MN3YR2WVvwW6avdpXMUZdZNAtBVPlV0famTCd-dXeHDmr53KNPQQNWLLM5Wgp3rUYvxbINhvTCnMlaUeHrp0Hab5BJaTB6SbabPpnPNPT1X3uvz6nQs3PgSbbG2pevw4Yn91DQI_kTuIcf7fmS39MdOm2LSFpB0wHgEvvlloLJfpXw0TvGjBpgZFeA8pIdmeoAr6q4aonVVkydr3WMN8v6DJ2DzFcfgYUHalxrDPoJTiZoh0U-qNTeUxc-kpXca8xlmO2EpZg4_SFbdZUU6ZNgQBiJoP99IwZ03Qzvp_0bdEbmigdzY8RLwP5riKHgotnXY4E71qS8yzlD8JvK4bK5ojBzvZvXlnfXDo0y82a8LJCHqjxbK3RbKDYZybb72d31gc-bpx6m1sKT24RnHZp2hq9FVbs=w80-h50-no" /><br>
+<small><a href="http://mapsnigeriainitiative.wordpress.com">mapsNI</a><small>
+</div>
+</body
+</html>
+
+
